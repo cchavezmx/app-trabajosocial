@@ -23,6 +23,4 @@ router.get('/app/notas/:nss', verifyToken, NotasValidator.getNotasbyNss, NotasCo
 module.exports = router
 
 
-
-
 // TODO // Update de notas

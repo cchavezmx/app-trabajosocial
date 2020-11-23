@@ -3,8 +3,7 @@ const { comparedPassword, createToken } = require('../util')
 
 module.exports = {
 
-    register: async (req, res) => {
-        
+    register: async (req, res) => {        
         const { name, email, password, confirmPassword } = req.body
         const errors = {}
     
@@ -36,20 +35,17 @@ module.exports = {
         }
     }, 
     login: async (req, res) =>  {
-
         const { email, password } = req.body
-        console.log(email, password)
         const errors = {}
         
         try {
-            
+           
             const user = await UserService.findUser(email)
 
             if(!user){
                 errors.message = 'El usuario no existe'
                 throw new Error('Authenticate Error', errors)
             }
-
             // revisamos la contraseña
             const isValidPassword = await comparedPassword(user.password, password)
 
