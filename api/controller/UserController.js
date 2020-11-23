@@ -1,4 +1,5 @@
 const { UserService } = require('../services/')
+const { comparedPassword, createToken } = require('../util')
 
 module.exports = {
 
@@ -37,11 +38,12 @@ module.exports = {
     login: async (req, res) =>  {
 
         const { email, password } = req.body
+        console.log(email, password)
         const errors = {}
         
         try {
             
-            const user = Userservice.findUser(email)
+            const user = await UserService.findUser(email)
 
             if(!user){
                 errors.message = 'El usuario no existe'
@@ -49,14 +51,17 @@ module.exports = {
             }
 
             // revisamos la contraseña
-            const isValidPassword = await comparedPassword(password)
+            const isValidPassword = await comparedPassword(user.password, password)
 
             if(!isValidPassword){
                 errors.message = 'Error en las credenciales'
                 throw new Error('Input Error', errors)
             }
+
+            const token = createToken(user)
+            if(!token) throw new Error('Token Error')
             
-            res.status(200).json({ message: 'Login Existoso',  login: user })
+            res.status(200).json({ message: 'Login Existoso',  login: token })
 
         } catch (error) {
             res.status(401).json({ message: 'Server error: ', errors })
