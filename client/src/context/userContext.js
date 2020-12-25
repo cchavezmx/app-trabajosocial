@@ -2,8 +2,7 @@ import React, { createContext, useContext } from 'react'
 import { Machine, assign } from 'xstate'
 import { useMachine } from '@xstate/react'
 
-import authController  from './authController'
-
+import User from './Controller/User'
 
 const StateContext = createContext();
 const DispatchContext = createContext();
@@ -22,7 +21,7 @@ export const authMachine = Machine({
             id: 'login',
             invoke: {
                 id: 'loginData',
-                src: authController.login,
+                src: User.login,
                 onDone: {
                     target: 'auth',
                     actions: assign({
@@ -38,27 +37,29 @@ export const authMachine = Machine({
                 
             }
         },
+        success: {},
+        error: {},
         auth: {
             id: 'auth',
             invoke: {
                 id: 'authUser',
-                src: authController.auth,
+                src: User.auth,
                 onDone: {
-                    target: 'success',
+                    target: 'auth_success',
                     actions: assign({
                         user: (_, event) => event.data
                     })
                 },
                 onError: {
-                    target: 'error',
+                    target: 'auth_fail',
                     actions: assign({
                         error: (_, event) => event.data
                     })
                 }
             }
         },
-        success: {},
-        error: {}
+        auth_success: {},
+        auth_fail: {},
     },
     on:{
         LOGIN: 'login',

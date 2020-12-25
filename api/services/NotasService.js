@@ -9,7 +9,8 @@ module.exports = {
         user.registros.push(content)
         user.save()
     },
-    getNotas: () => Notas.find().select("-registros")
+    getNotas: () => Notas.find().exec(),
+    findUserbyNss: (nss) => Notas.findOne({ nss })
 
 
 

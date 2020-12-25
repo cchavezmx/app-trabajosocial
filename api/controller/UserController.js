@@ -62,5 +62,15 @@ module.exports = {
         } catch (error) {
             res.status(401).json({ message: 'Server error: ', errors })
         }
+    },
+    findById: async (req, res) => {
+        const { id } =req.params
+        try {
+            const user = await UserService.findById(id)
+            if(!user) throw new Error('Usuario no encontrado')
+            res.status(200).json({ message: user })
+        } catch (error) {
+            res.status(400).json({ mesasge: error })
+        }
     }
 }

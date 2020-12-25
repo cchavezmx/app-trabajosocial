@@ -4,7 +4,8 @@ module.exports = {
 
     register: celebrate({ 
         [Segments.BODY]:Joi.object().keys({
-            nss: Joi.string().required()
+            nss: Joi.string().required(),
+            nombre: Joi.string().required(),
         })
     }),
     addNota: celebrate({

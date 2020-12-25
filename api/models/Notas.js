@@ -15,33 +15,33 @@ const NotasSchemas = new Schema({
     },
     curp: {
         type:String,
-        required:true
+        required:false,
     },
     unidad: {
         type:String,
-        required:true
+        required:false,
     },
     consultorio: {
         type: String,
-        required: true,
+        required: false,
     },
     turno: {
         type: String,
-        required: true
+        required: false,
     },
     edad: {
         type: Number,
-        required: true,
+        required: false,
         trim: true
     },
     sexo: {
         type: String,
-        required: true,
+        required: false,
         trim: true
     },
     phone: {
         type: String,
-        trim: true
+        trim: false,
     },
     registros: [registrosSchema],
 

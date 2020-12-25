@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import  { AppSocialProvider } from './context/userContext'
 import './scss/style.scss';
 
 const loading = (
@@ -21,8 +22,9 @@ class App extends Component {
 
   render() {
     return (
-      <HashRouter>
+      <Router>
           <React.Suspense fallback={loading}>
+          <AppSocialProvider>
             <Switch>
               <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
               <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>} />
@@ -30,8 +32,9 @@ class App extends Component {
               <Route exact path="/500" name="Page 500" render={props => <Page500 {...props}/>} />
               <Route path="/" name="Home" render={props => <TheLayout {...props}/>} />
             </Switch>
+            </AppSocialProvider>
           </React.Suspense>
-      </HashRouter>
+      </Router>
     );
   }
 }

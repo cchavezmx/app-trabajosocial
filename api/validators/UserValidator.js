@@ -16,6 +16,11 @@ module.exports = {
             email: Joi.string().required(),
             password: Joi.string().required(),
         })
+    }),
+    findById: celebrate({
+        [Segments.PARAMS]: Joi.object().keys({
+            id: Joi.string().required()
+        })
     })
 
 }

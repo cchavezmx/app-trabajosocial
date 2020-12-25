@@ -46,7 +46,6 @@ module.exports = {
                 throw new Error('Input Error', errors)
             }
 
-            console.log(user.registros)
             // añadimos el nota al registro
             const registro = await NotasService.addNota(user, contenet)
 
@@ -86,6 +85,15 @@ module.exports = {
         } catch (error) {
             res.status(401).json({ message: 'Error', errors })
 
+        }
+    },
+    findUserbyNss: async (req, res) => {
+        const { nss } = req.params
+        try {
+            const user = await NotasService.findUserbyNss(nss)
+            res.status(200).json({ user })
+        } catch (error) {
+            res.status(400).json({ error })
         }
     }
 }

@@ -12,15 +12,20 @@ router.use(express.json({ extended: true }));
 
 
 // nota "El campo unico es el NSS"
-router.post('/app/notas/', verifyToken, NotasValidator.register, NotasController.register)
+router.post('/app/notas/register', /*verifyToken ,*/ NotasValidator.register, NotasController.register)
 // añadir nota 
-router.post('/app/notas/:nss', verifyToken, NotasValidator.addNota, NotasController.addNota)
+router.post('/app/notas/add/:nss', /*verifyToken, */ NotasValidator.addNota, NotasController.addNota)
+
 // todas las notas sin registros
-router.get('/app/notas/', verifyToken, NotasController.getNotas)
-// todos los gistros por nota
-router.get('/app/notas/:nss', verifyToken, NotasValidator.getNotasbyNss, NotasController.getNotasbyNss)
-// crear, modificar y borrar 
+router.get('/app/pacientes/', /*verifyToken, */ NotasController.getNotas)
+
+// solo notas por nss 
+router.get('/app/notas/:nss', /* verifyToken, */ NotasValidator.getNotasbyNss, NotasController.getNotasbyNss)
+
+
+router.get('/app/paciente/:nss', /*verifyToken, */ NotasController.findUserbyNss)
+
 module.exports = router
 
-
-// TODO // Update de notas
+// TODO crear, modificar y borrar 
+// TODO faltan los validadores
