@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
-const { registrosSchema } = require('../models/Registros')
 
-
-const NotasSchemas = new Schema({
+const PacientesSchemas = new Schema({
+    is_active: {
+        type: Boolean,
+        default: true
+    },
     nss: {
         type:String,
         unique: true,
@@ -39,17 +41,23 @@ const NotasSchemas = new Schema({
         required: false,
         trim: true
     },
-    phone: {
+    contacto: {
         type: String,
         trim: false,
     },
-    registros: [registrosSchema],
+    // Se guarda unicamente el ObjectId 
+    registros: [{
+        registros_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'registros'
+        }
+    }],
 
 
 }, { timestamps: true })
 
-const Notas = mongoose.model('Notas', NotasSchemas)
+const Pacientes = mongoose.model('Pacientes', PacientesSchemas)
 
 module.exports = {
-    Notas
+    Pacientes
 }

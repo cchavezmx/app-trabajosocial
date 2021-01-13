@@ -1,8 +1,8 @@
 const UserValidator = require('./UserValidator')
-const NotasValidator = require('./NotasValidator')
+const PacientesValidator = require('./PacientesValidator')
 
 
 module.exports = {
     UserValidator,
-    NotasValidator
+    PacientesValidator
 }

@@ -1,7 +1,7 @@
 const { User } = require('./User')
-const { Notas } = require('./Notas')
+const { Pacientes } = require('./Pacientes')
 const { Registros } = require('./Registros')
 
 module.exports = {
-    User, Notas, Registros
+    User, Pacientes, Registros
 }

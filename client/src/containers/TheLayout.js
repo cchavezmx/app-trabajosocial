@@ -6,9 +6,11 @@ import {
 } from './index'
 import { useAuthDispatch, useAuthState } from '../context/userContext'
 import { Redirect } from 'react-router-dom'
-import SocialConent from './SocialContent'
 
-const TheLayout = () => {
+// Mi material 
+import SocialContent from './SocialContent'
+
+const TheLayout = (props) => {
   const state = useAuthState()
   const dispatch = useAuthDispatch()
 
@@ -26,7 +28,7 @@ const TheLayout = () => {
           <TheHeader/>
           <div className="c-body">
             {/* <TheContent/> */}
-            <SocialConent />
+            <SocialContent {...props} />
           </div>
           <TheFooter/>
         </div>
